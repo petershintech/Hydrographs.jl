@@ -42,8 +42,8 @@ julia> hydrograph(data, 1, 2)
 julia> hydrograph(data, "date", "flow")
 
 
-[travis-img]: https://travis-ci.org/petershintech/Hydrograph.jl.svg?branch=master
-[travis-url]: https://travis-ci.org/petershintech/Hydrograph.jl
+[travis-img]: https://travis-ci.org/petershintech/Hydrographs.jl.svg?branch=master
+[travis-url]: https://travis-ci.org/petershintech/Hydrographs.jl
 
-[codecov-img]: https://codecov.io/gh/petershintech/Hydrograph.jl/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/petershintech/Hydrograph.jl
+[codecov-img]: https://codecov.io/gh/petershintech/Hydrographs.jl/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/petershintech/Hydrographs.jl

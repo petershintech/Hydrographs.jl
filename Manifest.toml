@@ -3,11 +3,11 @@
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
-[[CSV]]
-deps = ["CategoricalArrays", "DataFrames", "Dates", "Mmap", "Parsers", "PooledArrays", "SentinelArrays", "Tables", "Unicode"]
-git-tree-sha1 = "a390152e6850405a48ca51bd7ca33d11a21d6230"
-uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
-version = "0.7.7"
+[[BinaryProvider]]
+deps = ["Libdl", "Logging", "SHA"]
+git-tree-sha1 = "ecdec412a9abc8db54c0efc5548c64dfce072058"
+uuid = "b99e7846-7c00-51b0-8f62-c81ae34c0232"
+version = "0.5.10"
 
 [[CategoricalArrays]]
 deps = ["DataAPI", "Future", "JSON", "Missings", "Printf", "Statistics", "StructTypes", "Unicode"]
@@ -38,10 +38,10 @@ uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 version = "0.21.7"
 
 [[DataStructures]]
-deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
-git-tree-sha1 = "6189e66c78a2d840db5ee530ac2326505b3cc7ae"
+deps = ["InteractiveUtils", "OrderedCollections"]
+git-tree-sha1 = "88d48e133e6d3dd68183309877eac74393daa7eb"
 uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
-version = "0.18.4"
+version = "0.17.20"
 
 [[DataValueInterfaces]]
 git-tree-sha1 = "bfc1187b79289637fa0ef6d4436ebdfe6905cbd6"
@@ -115,12 +115,6 @@ git-tree-sha1 = "15732c475062348b0165684ffe28e85ea8396afc"
 uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
 version = "1.0.0"
 
-[[IterableTables]]
-deps = ["DataValues", "IteratorInterfaceExtensions", "Requires", "TableTraits", "TableTraitsUtils"]
-git-tree-sha1 = "70300b876b2cebde43ebc0df42bc8c94a144e1b4"
-uuid = "1c8ee90f-4401-5389-894e-7a04a3dc0f4d"
-version = "1.0.0"
-
 [[IteratorInterfaceExtensions]]
 git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
 uuid = "82899510-4779-5014-852e-03e436cf321d"
@@ -133,10 +127,10 @@ uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.21.1"
 
 [[JSONSchema]]
-deps = ["HTTP", "JSON", "Test"]
-git-tree-sha1 = "6f80c4ea9ccf648766380b28b63efd1050dee940"
+deps = ["BinaryProvider", "HTTP", "JSON"]
+git-tree-sha1 = "b0a7f9328967df5213691d318a03cf70ea8c76b1"
 uuid = "7d188eb4-7ad8-530c-ae41-71a32a6d4692"
-version = "0.1.1"
+version = "0.2.0"
 
 [[LibGit2]]
 deps = ["Printf"]
@@ -237,20 +231,14 @@ version = "1.0.2"
 [[SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 
-[[SentinelArrays]]
-deps = ["Dates", "Random"]
-git-tree-sha1 = "7a74946ace3b34fbb6c10e61b6e250b33d7e758c"
-uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
-version = "1.2.15"
-
 [[Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
 [[Setfield]]
 deps = ["ConstructionBase", "Future", "MacroTools", "Requires"]
-git-tree-sha1 = "ed5045722fcdacf263a90fb9eb9f258598ccebac"
+git-tree-sha1 = "7a151f918819326a6003dba451dabe65f8c0f6fb"
 uuid = "efcf1570-3423-57d1-acb7-fd33fddbac46"
-version = "0.5.4"
+version = "0.6.0"
 
 [[SharedArrays]]
 deps = ["Distributed", "Mmap", "Random", "Serialization"]
@@ -314,8 +302,14 @@ uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 [[Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
+[[Vega]]
+deps = ["DataStructures", "DataValues", "Dates", "FileIO", "FilePaths", "IteratorInterfaceExtensions", "JSON", "JSONSchema", "MacroTools", "NodeJS", "Pkg", "REPL", "Random", "Setfield", "TableTraits", "TableTraitsUtils", "URIParser"]
+git-tree-sha1 = "ea6d7d5ee93fce89c352fe4cd31d6d2a57ef312b"
+uuid = "239c3e63-733f-47ad-beb7-a12fde22c578"
+version = "2.0.0"
+
 [[VegaLite]]
-deps = ["DataValues", "Dates", "FileIO", "FilePaths", "IterableTables", "IteratorInterfaceExtensions", "JSON", "JSONSchema", "MacroTools", "NodeJS", "REPL", "Random", "Setfield", "TableTraits", "URIParser"]
-git-tree-sha1 = "998dea170dfc5df763d1baa7d238de3f1dd28f9e"
+deps = ["Base64", "DataStructures", "DataValues", "Dates", "FileIO", "FilePaths", "IteratorInterfaceExtensions", "JSON", "JSONSchema", "MacroTools", "NodeJS", "Pkg", "REPL", "Random", "Setfield", "TableTraits", "TableTraitsUtils", "URIParser", "Vega"]
+git-tree-sha1 = "57634eda07c4a48f543c7e8701eb6f4ee09ba2fa"
 uuid = "112f6efa-9a02-5b7d-90c0-432ed331239a"
-version = "1.0.0"
+version = "2.3.0"

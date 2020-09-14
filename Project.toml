@@ -9,5 +9,5 @@ VegaLite = "112f6efa-9a02-5b7d-90c0-432ed331239a"
 
 [compat]
 DataFrames = "0.21"
-VegaLite = "1.0"
+VegaLite = "1.0, 2.3"
 julia = "1.5"

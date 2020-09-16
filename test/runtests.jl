@@ -26,7 +26,7 @@ using CSV
     @test plt.vconcat[1]["encoding"]["x"]["field"] == "Date"
     @test plt.vconcat[1]["encoding"]["y"]["field"] == "Rainfall"
 
-    plt = hydrograph(data, "Date", 1, 2, 4)
+    plt = hydrograph(data, 1, 2, 4)
     @test plt.vconcat[1]["encoding"]["x"]["field"] == "Date"
     @test plt.vconcat[1]["encoding"]["y"]["field"] == "Rainfall"
 end

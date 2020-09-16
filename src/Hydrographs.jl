@@ -158,4 +158,9 @@ function hydrograph(data::DataFrame, it::Int, iq::Int)
     return hydrograph(data, T, Q)
 end
 
+function hydrograph(data::DataFrame, it::Int, iq::Int, ip::Int)
+    T, Q, P = names(data)[[it, iq, ip]]
+    return hydrograph(data, T, Q, P)
+end
+
 end # Hydrographs

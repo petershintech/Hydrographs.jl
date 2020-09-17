@@ -29,4 +29,10 @@ using CSV
     plt = hydrograph(data, 1, 2, 4)
     @test plt.vconcat[1]["encoding"]["x"]["field"] == "Date"
     @test plt.vconcat[1]["encoding"]["y"]["field"] == "Rainfall"
+
+    T = data.Date; Q = data.Flow; P = data.Rainfall
+    p = hydrograph(T, Q, P)
+    @test plt.vconcat[1]["encoding"]["x"]["field"] == "Date"
+    @test plt.vconcat[1]["encoding"]["y"]["field"] == "Rainfall"
+    @test_throws ArgumentError hydrograph(T[1:end-1],Q,P)
 end

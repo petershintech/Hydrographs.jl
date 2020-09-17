@@ -1,12 +1,12 @@
 module Hydrographs
 
-using VegaLite
+using VegaLite: @vlplot, VLSpec
 using DataFrames: DataFrame
 using Dates: Date
 
 export hydrograph
 
-function hydrograph(data::DataFrame, T::AbstractString, Q::AbstractString)
+function hydrograph(data::DataFrame, T::AbstractString, Q::AbstractString)::VLSpec
     plt = data |> @vlplot(
         vconcat = [
             {
@@ -64,7 +64,7 @@ function hydrograph(data::DataFrame, T::AbstractString, Q::AbstractString)
 end
 
 function hydrograph(data::DataFrame,
-                    T::AbstractString, Q::AbstractString, P::AbstractString)
+                    T::AbstractString, Q::AbstractString, P::AbstractString)::VLSpec
     plt = data |> @vlplot(
         vconcat = [
             {

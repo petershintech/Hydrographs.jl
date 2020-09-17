@@ -44,6 +44,7 @@ julia> hydrograph(data, 1, 2)
 julia> hydrograph(data, "Date", "Flow", "Rainfall")
 
 julia> hydrograph(data, 1, 2, 4)
+````
 
 [travis-img]: https://travis-ci.org/petershintech/Hydrographs.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/petershintech/Hydrographs.jl

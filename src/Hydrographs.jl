@@ -130,7 +130,8 @@ function hydrograph(data::DataFrame,
                 encoding = {
                     x = {
                         field = T,
-                        type = "temporal"
+                        type = "temporal",
+                        timeUnit = "yearmonth"
                     },
                     y = {
                         field = Q,
@@ -138,7 +139,8 @@ function hydrograph(data::DataFrame,
                         axis = {
                             tickCount = 3,
                             grid = false
-                        }
+                        },
+                        aggregate = "sum"
                     }
                 }
             }

@@ -39,4 +39,12 @@ using CSV
     plt = hydrograph(data; width=1000)
     @test plt.vconcat[1]["encoding"]["x"]["field"] == names(data)[1]
     @test plt.vconcat[2]["encoding"]["y"]["field"] == names(data)[2]
+
+    plt = hydrograph(data; aggreate="monthly")
+    @test plt.vconcat[1]["encoding"]["x"]["timeUnit"] == "yearmonth"
+    @test plt.vconcat[2]["encoding"]["y"]["aggregate"] == "sum"
+
+    plt = hydrograph(data; aggreate="weekly")
+    @test plt.vconcat[1]["encoding"]["x"]["timeUnit"] == "yearmonth"
+    @test plt.vconcat[2]["encoding"]["y"]["aggregate"] == "sum"
 end

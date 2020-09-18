@@ -49,6 +49,9 @@ julia> hydrograph(data.Date, data.Flow, data.Rainfall)
 
 julia> hydrograph(data; width=1000)
 
+julia> hydrograph(data; aggregate="monthly")
+
+julia> hydrograph(data; aggregate="weekly")
 ````
 
 [travis-img]: https://travis-ci.org/petershintech/Hydrographs.jl.svg?branch=master

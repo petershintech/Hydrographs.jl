@@ -22,6 +22,15 @@ function set_options!(vlspec, kwargs)
             panel["width"] = kwargs[:width]
         end
     end
+    if :aggregate in keys(kwargs)
+        if kwargs[:aggregate] == "monthly"
+            vlspec["vconcat"][end]["encoding"]["x"]["timeUnit"] = "yearmonth"
+            vlspec["vconcat"][end]["encoding"]["y"]["aggregate"] = "sum"
+        elseif kwargs[:aggregate] == "weekly"
+            vlspec["vconcat"][end]["encoding"]["x"]["timeUnit"] = "yearweek"
+            vlspec["vconcat"][end]["encoding"]["y"]["aggregate"] = "sum"
+        end
+    end
 end
 
 function hydrograph(data::DataFrame, T::AbstractString,

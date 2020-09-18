@@ -67,8 +67,7 @@
             "encoding": {
                 "x": {
                     "field": "Date",
-                    "type": "temporal",
-                    "timeUnit": "yearmonth"
+                    "type": "temporal"
                 },
                 "y": {
                     "field": "Flow",
@@ -76,8 +75,7 @@
                     "axis": {
                         "tickCount": 3,
                         "grid": false
-                    },
-                    "aggregate": "sum"
+                    }
                 }
             }
         }

@@ -1,153 +1,47 @@
 module Hydrographs
 
-using VegaLite: @vlplot, VLSpec
-using DataFrames: DataFrame
 using Dates: Date
+using DataStructures: OrderedDict
+using DataFrames: DataFrame
+using JSON: parse
+using VegaLite: VLSpec
 
 export hydrograph
 
-function hydrograph(data::DataFrame, T::AbstractString, Q::AbstractString)::VLSpec
-    plt = data |> @vlplot(
-        vconcat = [
-            {
-                width = 800,
-                mark = "line",
-                encoding = {
-                    x = {
-                        field = T,
-                        type = "temporal",
-                        scale = {
-                            domain = {
-                                selection = "brush"
-                            }
-                        },
-                        axis = {
-                            title = ""
-                        }
-                    },
-                    y = {
-                        field = Q,
-                        type = "quantitative"
-                    }
-                },
-                transform = [{filter = {selection = "brush"}}]
-            },
-            {
-                width = 800,
-                height = 60,
-                mark = "area",
-                selection = {
-                    brush = {
-                        type = "interval",
-                        encodings = ["x"]
-                    }
-                },
-                encoding = {
-                    x = {
-                        field = T,
-                        type = "temporal"
-                    },
-                    y = {
-                        field = Q,
-                        type = "quantitative",
-                        axis = {
-                            tickCount = 3,
-                            grid = false
-                        }
-                    }
-                }
-            }
-        ]
-    )
+function read_template()
+    path = joinpath(dirname(@__FILE__), "template.json")
+    template = parse(open(path), dicttype=OrderedDict)
+    return template
+end
 
+vl_template = read_template()
+
+function hydrograph(data::DataFrame, T::AbstractString, Q::AbstractString)::VLSpec
+    vlspec = deepcopy(vl_template)
+
+    popfirst!(vlspec["vconcat"])
+
+    for panel in vlspec["vconcat"]
+        panel["encoding"]["x"]["field"] = T
+        panel["encoding"]["y"]["field"] = Q
+    end
+
+    plt = data |> VLSpec(vlspec)
     return plt
 end
 
 function hydrograph(data::DataFrame,
                     T::AbstractString, Q::AbstractString, P::AbstractString)::VLSpec
-    plt = data |> @vlplot(
-        vconcat = [
-            {
-                width = 800,
-                height = 60,
-                mark = {
-                    type = "bar",
-                    binSpacing = 0
-                },
-                encoding = {
-                    x = {
-                        field = T,
-                        type = "temporal",
-                        scale = {
-                            domain = {
-                                selection = "brush"
-                            }
-                        },
-                        axis = {
-                            title = "",
-                            labels = false
-                        }
-                    },
-                    y = {
-                        field = P,
-                        type = "quantitative"
-                    }
-                },
-                transform = [{filter = {selection = "brush"}}]
-            },
-            {
-                width = 800,
-                mark = {type = "area", line = true},
-                encoding = {
-                    x = {
-                        field = T,
-                        type = "temporal",
-                        scale = {
-                            domain = {
-                                selection = "brush"
-                            }
-                        },
-                        axis = {
-                            title = ""
-                        }
-                    },
-                    y = {
-                        field = Q,
-                        type = "quantitative"
-                    }
-                },
-                transform = [{filter = {selection = "brush"}}]
-            },
-            {
-                width = 800,
-                height = 60,
-                mark = "area",
-                selection = {
-                    brush = {
-                        type = "interval",
-                        encodings = ["x"]
-                    }
-                },
-                encoding = {
-                    x = {
-                        field = T,
-                        type = "temporal",
-                        timeUnit = "yearmonth"
-                    },
-                    y = {
-                        field = Q,
-                        type = "quantitative",
-                        axis = {
-                            tickCount = 3,
-                            grid = false
-                        },
-                        aggregate = "sum"
-                    }
-                }
-            }
-        ]
-    )
+    vlspec = deepcopy(vl_template)
 
+    for panel in vlspec["vconcat"]
+        panel["encoding"]["x"]["field"] = T
+    end
+    vlspec["vconcat"][1]["encoding"]["y"]["field"] = P
+    vlspec["vconcat"][2]["encoding"]["y"]["field"] = Q
+    vlspec["vconcat"][3]["encoding"]["y"]["field"] = Q
+
+    plt = data |> VLSpec(vlspec)
     return plt
 end
 

@@ -1,0 +1,84 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Hydrograph.",
+    "vconcat": [
+        {
+            "width": 800,
+            "height": 60,
+            "mark": {
+                "type": "bar",
+                "binSpacing": 0
+            },
+            "encoding": {
+                "x": {
+                    "field": "Date",
+                    "type": "temporal",
+                    "scale": {
+                        "domain": {
+                            "selection": "brush"
+                        }
+                    },
+                    "axis": {
+                        "title": "",
+                        "labels": false
+                    }
+                },
+                "y": {
+                    "field": "Rainfall",
+                    "type": "quantitative"
+                }
+            },
+            "transform": [{"filter": {"selection": "brush"}}]
+        },
+        {
+            "width": 800,
+            "mark": {"type": "area", "line": true},
+            "encoding": {
+                "x": {
+                    "field": "Date",
+                    "type": "temporal",
+                    "scale": {
+                        "domain": {
+                            "selection": "brush"
+                        }
+                    },
+                    "axis": {
+                        "title": ""
+                    }
+                },
+                "y": {
+                    "field": "Flow",
+                    "type": "quantitative"
+                }
+            },
+            "transform": [{"filter": {"selection": "brush"}}]
+        },
+        {
+            "width": 800,
+            "height": 60,
+            "mark": "area",
+            "selection": {
+                "brush": {
+                    "type": "interval",
+                    "encodings": ["x"]
+                }
+            },
+            "encoding": {
+                "x": {
+                    "field": "Date",
+                    "type": "temporal",
+                    "timeUnit": "yearmonth"
+                },
+                "y": {
+                    "field": "Flow",
+                    "type": "quantitative",
+                    "axis": {
+                        "tickCount": 3,
+                        "grid": false
+                    },
+                    "aggregate": "sum"
+                }
+            }
+        }
+    ]
+}

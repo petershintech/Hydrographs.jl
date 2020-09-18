@@ -35,4 +35,8 @@ using CSV
     @test plt.vconcat[1]["encoding"]["x"]["field"] == "Date"
     @test plt.vconcat[1]["encoding"]["y"]["field"] == "Rainfall"
     @test_throws DimensionMismatch hydrograph(T[1:end-1],Q,P)
+
+    plt = hydrograph(data; width=1000)
+    @test plt.vconcat[1]["encoding"]["x"]["field"] == names(data)[1]
+    @test plt.vconcat[2]["encoding"]["y"]["field"] == names(data)[2]
 end

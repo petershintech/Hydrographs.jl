@@ -1,3 +1,6 @@
+# Goulburn River at Dohertys (405219), Australia
+# Streamflow data downloaded from the Hydrologic Reference Stations Service
+# and rainfall data derived from AWAP data of the Bureau of Meteorology, Australia
 Date,Flow,Qcode,Rainfall
 1980-01-01,130.81,A,2.315
 1980-01-02,127.44,A,0.000

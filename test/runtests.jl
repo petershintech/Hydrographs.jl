@@ -40,11 +40,11 @@ using CSV
     @test plt.vconcat[1]["encoding"]["x"]["field"] == names(data)[1]
     @test plt.vconcat[2]["encoding"]["y"]["field"] == names(data)[2]
 
-    plt = hydrograph(data; aggreate="monthly")
-    @test plt.vconcat[1]["encoding"]["x"]["timeUnit"] == "yearmonth"
-    @test plt.vconcat[2]["encoding"]["y"]["aggregate"] == "sum"
+    plt = hydrograph(data; aggregate="monthly")
+    @test plt.vconcat[end]["encoding"]["x"]["timeUnit"] == "yearmonth"
+    @test plt.vconcat[end]["encoding"]["y"]["aggregate"] == "sum"
 
-    plt = hydrograph(data; aggreate="weekly")
-    @test plt.vconcat[1]["encoding"]["x"]["timeUnit"] == "yearmonth"
-    @test plt.vconcat[2]["encoding"]["y"]["aggregate"] == "sum"
+    plt = hydrograph(data, 1, 2, 4; aggregate="weekly")
+    @test plt.vconcat[end]["encoding"]["x"]["timeUnit"] == "yearweek"
+    @test plt.vconcat[end]["encoding"]["y"]["aggregate"] == "sum"
 end

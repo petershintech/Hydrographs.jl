@@ -1,10 +1,11 @@
 using Hydrographs
 
 using Test
-using CSV
 
 @testset "Hydrographs.jl" begin
-    data = CSV.read(joinpath("..", "data", "data.csv"))
+    data = dataset("doherty")
+    @test names(data) == ["Date", "Flow", "Qcode", "Rainfall"]
+    @test size(data)[1] > 0
 
     plt = hydrograph(data)
     @test plt.vconcat[1]["encoding"]["x"]["field"] == names(data)[1]

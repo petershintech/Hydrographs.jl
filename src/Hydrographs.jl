@@ -3,13 +3,14 @@ module Hydrographs
 using Dates: Date
 using DataStructures: OrderedDict
 using DataFrames: DataFrame
+using CSV: File
 using JSON: parse
 using VegaLite: VLSpec
 
-export hydrograph
+export hydrograph, dataset
 
 function read_template()
-    path = joinpath(dirname(@__FILE__), "template.json")
+    path = joinpath(@__DIR__, "template.json")
     template = parse(open(path), dicttype=OrderedDict)
     return template
 end
@@ -89,6 +90,15 @@ function hydrograph(T::Array{Date,1}, Q::Array{Float64,1},
 
     data = DataFrame("Date"=>T, "Flow"=>Q, "Rainfall"=>P)
     return hydrograph(data, "Date", "Flow", "Rainfall"; kwargs...)
+end
+
+function dataset(name::AbstractString)::DataFrame
+    data_path = joinpath(@__DIR__, "..", "data", string(name, ".csv"))
+
+    ispath(data_path) || error("Unable to locate dataset file $data_path")
+    isfile(data_path) || error("Not a file, $data_path")
+
+    return DataFrame(File(data_path, header=true, comment="#"))
 end
 
 end # Hydrographs

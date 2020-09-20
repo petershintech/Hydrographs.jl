@@ -25,7 +25,8 @@
                 },
                 "y": {
                     "field": "Rainfall",
-                    "type": "quantitative"
+                    "type": "quantitative",
+                    "sort": "descending"
                 }
             },
             "transform": [{"filter": {"selection": "brush"}}]

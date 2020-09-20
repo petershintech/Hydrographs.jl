@@ -48,4 +48,8 @@ using Test
     plt = hydrograph(data, 1, 2, 4; aggregate="weekly")
     @test plt.vconcat[end]["encoding"]["x"]["timeUnit"] == "yearweek"
     @test plt.vconcat[end]["encoding"]["y"]["aggregate"] == "sum"
+
+    plt = hydrograph(data; logscale=true)
+    @test plt.vconcat[end-1]["encoding"]["y"]["scale"]["type"] == "log"
+    @test plt.vconcat[end]["encoding"]["y"]["scale"]["type"] == "log"
 end

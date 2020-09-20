@@ -50,7 +50,8 @@
                 },
                 "y": {
                     "field": "Flow",
-                    "type": "quantitative"
+                    "type": "quantitative",
+                    "scale": {"type": "linear"}
                 }
             },
             "transform": [{"filter": {"selection": "brush"}}]
@@ -73,6 +74,7 @@
                 "y": {
                     "field": "Flow",
                     "type": "quantitative",
+                    "scale": {"type": "linear"},
                     "axis": {
                         "tickCount": 3,
                         "grid": false

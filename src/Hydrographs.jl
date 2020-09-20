@@ -32,6 +32,10 @@ function set_options!(vlspec, kwargs)
             vlspec["vconcat"][end]["encoding"]["y"]["aggregate"] = "sum"
         end
     end
+    if get(kwargs, :logscale, false)
+        vlspec["vconcat"][end-1]["encoding"]["y"]["scale"]["type"] = "log"
+        vlspec["vconcat"][end]["encoding"]["y"]["scale"]["type"] = "log"
+    end
 end
 
 function hydrograph(data::DataFrame, T::AbstractString,

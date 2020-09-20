@@ -58,6 +58,12 @@ You can also give the indices of columns for dates and streamflow data.
 julia> hydrograph(data, 1, 2)
 ````
 
+If you plot streamflow data in a log scale,
+
+````julia
+julia> hydrograph(data; logscale=true)
+
+
 If you want to plot rainfall data along with streamflow data, give the column name as following.
 
 ````julia

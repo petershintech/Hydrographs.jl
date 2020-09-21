@@ -81,6 +81,15 @@ You can directly give arrays. The arrays should have the same lengths.
 julia> hydrograph(data.Date, data.Flow, data.Rainfall)
 ````
 
+You can plot a hydrograph with two dataframes: one for streamflow data and the other for rainfall data.
+In the case, the data periods can be different.
+
+````julia
+julia> Q = data[!,[:Date,:Flow]]
+julia> P = data[!,[:Date,:Rainfall]]
+julia> hydrograph(Q, P)
+````
+
 If you want to change the width of hydrograph,
 
 ````julia

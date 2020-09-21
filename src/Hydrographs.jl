@@ -2,7 +2,7 @@ module Hydrographs
 
 using Dates: Date
 using DataStructures: OrderedDict
-using DataFrames: DataFrame, outerjoin
+using DataFrames: DataFrame, outerjoin, sort!
 using CSV: File
 using JSON: parse
 using VegaLite: VLSpec
@@ -97,8 +97,9 @@ function hydrograph(T::Array{Date,1}, Q::Array{Float64,1},
 end
 
 function hydrograph(Q::DataFrame, P::DataFrame; kwargs...)
-    data = outerjoin(Q, P, on=:Date)
-    return hydrograph(data, names(Q)[2], names(P)[2]; kwargs...)
+    data = outerjoin(Q, P, on="Date")
+    sort!(data, "Date")
+    return hydrograph(data, "Date", names(Q)[2], names(P)[2]; kwargs...)
 end
 
 function dataset(name::AbstractString)::DataFrame

@@ -37,6 +37,11 @@ using Test
     @test plt.vconcat[1]["encoding"]["y"]["field"] == "Rainfall"
     @test_throws DimensionMismatch hydrograph(T[1:end-1],Q,P)
 
+    Q = data[!,[:Date,:Flow]][365:end,:]
+    P = data[!,[:Date,:Rainfall]][1:end-365,:]
+    p = hydrograph(Q, P)
+    #TODO: Need to add unit tests here.
+
     plt = hydrograph(data; width=1000)
     @test plt.vconcat[1]["encoding"]["x"]["field"] == names(data)[1]
     @test plt.vconcat[2]["encoding"]["y"]["field"] == names(data)[2]

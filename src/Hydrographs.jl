@@ -38,6 +38,90 @@ function set_options!(vlspec, kwargs)
     end
 end
 
+"""
+    Plot a hydrograph with streamflow and rainfall data
+
+
+You can plot a hydrograph with a dataframe.
+In this case, `hydrograph` looks for the `Date` column for dates and the `Flow` column for streamflow data.
+
+````julia
+julia> data = dataset("doherty")
+julia> hydrograph(data)
+````
+
+You can also use pipe operator to use a dataframe.
+
+````julia
+julia> data |> hydrograph
+
+````
+
+You can give column names for dates and streamflow data.
+
+````julia
+julia> hydrograph(data, "Date", "Flow")
+````
+
+You can also give the indices of columns for dates and streamflow data.
+
+````julia
+julia> hydrograph(data, 1, 2)
+````
+
+If you plot streamflow data in a log scale,
+
+````julia
+julia> hydrograph(data; logscale=true)
+
+
+If you want to plot rainfall data along with streamflow data, give the column name as following.
+
+````julia
+julia> hydrograph(data, "Date", "Flow", "Rainfall")
+````
+
+Or, you can give column indices.
+
+````julia
+julia> hydrograph(data, 1, 2, 4)
+````
+
+You can directly give arrays. The arrays should have the same lengths.
+````julia
+julia> hydrograph(data.Date, data.Flow, data.Rainfall)
+````
+
+You can plot a hydrograph with two dataframes: one for streamflow data and the other for rainfall data.
+In the case, the data periods can be different.
+
+````julia
+julia> Q = data[!,[:Date,:Flow]]
+julia> P = data[!,[:Date,:Rainfall]]
+julia> hydrograph(Q, P)
+````
+
+If you want to change the width of hydrograph,
+
+````julia
+julia> hydrograph(data; width=1000)
+````
+
+The hydrograph at the bottom does not aggregate streamflow data.
+If you want to show monthly aggregated data in the hydrograph, use `aggregate` keyword.
+
+````julia
+julia> hydrograph(data; aggregate="monthly")
+````
+
+If you want to show weekly aggregated streamflow data,
+
+````julia
+julia> hydrograph(data; aggregate="weekly")
+````
+"""
+function hydrograph() end
+
 function hydrograph(data::DataFrame, T::AbstractString,
                     Q::AbstractString; kwargs...)::VLSpec
     vlspec = deepcopy(vl_template)

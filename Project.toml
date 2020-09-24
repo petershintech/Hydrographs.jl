@@ -1,7 +1,7 @@
 name = "Hydrographs"
 uuid = "b8148ea3-0609-4e06-811a-0cc0e815f0cc"
 authors = ["Peter Shin <petershintech@gmail.com>"]
-version = "0.2.3"
+version = "0.2.4-pre"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
